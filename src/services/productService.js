@@ -22,9 +22,24 @@ const findProduct = async (req) => {
         return [];
     }
 };
+
+const getCategories = async (req) => {
+    try {
+        const response = await apiInstance.get(`products/categories`);
+        return response?.data ?? [];
+
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        return [];
+    }
+};
+
+'https://dummyjson.com/'
+
 const ProductService = {
     getAll,
-    findProduct
+    findProduct,
+    getCategories
 }
 
 export default ProductService;

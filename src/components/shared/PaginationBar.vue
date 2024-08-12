@@ -1,18 +1,12 @@
 <template>
   <div class="pagination">
     <a @click="movePage('left_right', -1)" class="previous">
-      <VueIcon icon="mdi:arrow-left" width="20px" color="white" />
+      <VueIcon icon="mdi:arrow-left" width="20px" color="black" />
     </a>
-    <a
-      v-for="(item, index) in numbers"
-      :key="index"
-      @click="movePage('normal', item)"
-      class="btn"
-      :class="{ active: pageNumber === item }"
-      >{{ item }}</a
-    >
+    <a v-for="(item, index) in numbers" :key="index" @click="movePage('normal', item)" class="btn"
+      :class="{ active: pageNumber === item }">{{ item }}</a>
     <a @click="movePage('left_right', 1)" class="next">
-      <VueIcon icon="mdi:arrow-right" width="20px" color="white" />
+      <VueIcon icon="mdi:arrow-right" width="20px" color="black" />
     </a>
   </div>
 </template>
@@ -33,8 +27,14 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+
+    console.log("Current Page:", props.pageNumber);
+
+
     const movePage = (direction, value) => {
       emit("movePage", direction, value);
+      console.log("Current Page:", props.pageNumber);
+
     };
 
     const isActive = computed(() => props.pageNumber);
@@ -70,16 +70,19 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
+  border: 1px solid black;
+  color: black
 }
 
 .pagination a:hover {
-  border: 1px solid #bb79f6;
+  border: 1px solid black;
   transition-duration: 0.1s;
   cursor: pointer;
 }
 
 .active {
-  background: #bb79f6;
+  background: black;
   transition-duration: 0.1s;
+  color: white;
 }
 </style>

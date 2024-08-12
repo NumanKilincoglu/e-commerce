@@ -69,7 +69,7 @@ h5 {
 
 .add-btn:hover {
   transition: 0.3s;
-  background-color: #0242e8;
+  background-color: #0d0d0e;
   cursor: pointer;
 }
 
