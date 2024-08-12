@@ -1,0 +1,19 @@
+{
+  "name": "e-commerce",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.35"
+  },
+  "devDependencies": {
+    "@iconify/vue": "^4.1.2",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "vite": "^5.4.0"
+  }
+}
