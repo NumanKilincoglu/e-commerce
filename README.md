@@ -73,7 +73,7 @@ The e-commerce project leverages Vue 3, Vite, Vue Router, Bootstrap, and Pinia t
 5. **User Experience**:
    - Focused on delivering a smooth and intuitive user experience with a clean UI and responsive design for better device usability.
 
-### !!!İMPORTANT NOTE!!!
+### !!!IMPORTANT NOTE!!!
 Mock API Limitation: Currently, the mock API does not support filtering by price range. Consequently, filtering by price range only applies to the items on the current page. This approach was necessary due to API constraints.
 
 
