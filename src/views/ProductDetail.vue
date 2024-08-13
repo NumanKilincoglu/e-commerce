@@ -128,7 +128,7 @@
       </div>
     </div>
   </div>
-  <div v-else class="empty-field" style="height: 150px">
+  <div v-if="!productStore.productLoading && !productStore.product" class="empty-field" style="height: 150px">
     <h5>Items Not Found. Please try again</h5>
     <VueIcon height="30px" color="black" icon="mingcute:sad-line" />
   </div>
