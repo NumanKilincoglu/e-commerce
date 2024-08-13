@@ -30,12 +30,15 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   background-color: white;
-  margin-top: 2rem;
+  margin: 0;
+  position: relative;
 }
 
 .router-wrap {
   height: 100%;
   width: 100%;
+  padding-top: 1rem;
+  position: relative;
 }
 
 h1 {
@@ -43,44 +46,45 @@ h1 {
   line-height: 1.1;
 }
 
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #323940;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #954ce9;
   border-radius: 3px;
   transition: 0.3s;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   transition: 0.3s;
   background: #6027a2;
 }
 
-.arrow {
+
+.dropdown-arrow {
+  margin-left: 10px;
   border: solid black;
-  border-width: 0 3px 3px 0;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
-}
-
-.up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-}
-
-.down {
   transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
+  transition: transform 0.3s;
 }
+
+
 
 @media (prefers-color-scheme: light) {
   :root {

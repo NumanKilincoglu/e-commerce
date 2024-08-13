@@ -48,10 +48,16 @@ export default {
   max-width: 500px;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-radius: 24px;
+  border-radius: 0 * x;
   border: 1.5px transparent solid;
   height: 40px;
-  border: 1px rgb(105, 105, 105) solid;
+  border: 1px #ccc transparent;
+  border-bottom: 1px #ccc solid;
+}
+
+.search_bar_custom:hover {
+  transition: 0.4s;
+  border-color: rgb(98, 98, 98);
 }
 
 .search_input {
@@ -96,7 +102,13 @@ input:focus {
 
 @media screen and (max-width: 576px) {
   .search_bar_custom {
-    width: 100%;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+
+  .search_input {
+    margin-left: 0px;
+    padding-left: 5px;
   }
 }
 </style>

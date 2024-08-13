@@ -1,24 +1,40 @@
 <template>
   <div
-    @click="go"
     @mouseenter="showButton = true"
     @mouseleave="showButton = false"
-    class="list-card select_item"
+    class="list-card"
   >
-    <a class="list-card-img">
+    <span class="discount">- {{ item.discountPercentage.toFixed(0) }} %</span>
+    <a @click="go" class="list-card-img">
       <img class="img" :src="item.thumbnail" />
     </a>
-    <div class="list-card__title sell-card-title"></div>
     <div class="detail">
       <div>
-        <h5>{{ item.title }}</h5>
+        <h6>{{ item.title }}</h6>
+        <div class="rating">
+          <div>
+            <h6>
+              {{ item.rating.toFixed(1) }}
+            </h6>
+          </div>
+
+          <div class="start-wrap">
+            <span
+              v-for="star in 5"
+              :key="star"
+              class="star"
+              :class="{ filled: item.rating >= star }"
+              >★
+            </span>
+          </div>
+        </div>
       </div>
       <div class="f flex-column align-center fg1">
         <span class="f mid-span"> $ {{ item.price }} </span>
       </div>
     </div>
     <div v-if="showButton" class="add-cart">
-      <button class="add-btn">
+      <button @click="addCart" class="add-btn">
         <h5>Add to cart</h5>
       </button>
     </div>
@@ -26,32 +42,51 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
+<script setup>
+import { ref, defineEmits } from "vue";
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
   },
-  data() {
-    return {
-      isActive: false,
-      showButton: false,
-    };
-  },
-  methods: {
-    go() {
-      this.$emit("go-item", this.item.name);
-    },
-  },
+});
+
+const isActive = ref(false);
+const showButton = ref(false);
+
+const emit = defineEmits();
+
+const go = () => {
+  emit("go-product", props.item.id);
+};
+
+const addCart = () => {
+  emit("add-to-cart", props.item);
 };
 </script>
 
 <style scoped>
+h6,
 h5 {
   margin: 0;
   color: black;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+.discount {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #ff0f0f;
+  z-index: 3;
+  border: 1px solid #ff0f0f;
+  font-size: 11px;
+  padding: 0.1rem 0.3rem;
+  border-radius: 1px;
 }
 
 .add-cart {
@@ -63,7 +98,7 @@ h5 {
 .add-btn {
   width: 100%;
   background-color: white;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 1px solid rgb(152, 152, 152);
 }
 
@@ -97,7 +132,17 @@ p {
   justify-content: space-between;
   gap: 10px;
   width: 100%;
+  position: relative;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.3rem;
+  border-radius: 4px;
 }
+
+.list-card:hover {
+  transition: 0.3s;
+  border-color: rgb(175, 175, 175);
+}
+
 .detail {
   display: flex;
   flex-direction: column;
@@ -106,6 +151,28 @@ p {
   text-align: start;
   width: 100%;
   min-height: 20px;
+}
+
+.start-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.star {
+  color: #ddd;
+  font-size: 20px;
+  margin: 0 1px;
+}
+
+.star.filled {
+  color: #f39c12;
 }
 
 a {
@@ -162,16 +229,6 @@ a {
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
-}
-
-.list-card__price {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 15px;
-  line-height: 25px;
-  color: #dd1b5f;
-  margin-top: 10px;
 }
 
 @media screen and (min-width: 1100px) {
