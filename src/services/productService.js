@@ -41,7 +41,7 @@ const findOneProduct = async (req) => {
     }
 };
 
-const getCategories = async (req) => {
+const getCategories = async () => {
     try {
         const response = await apiInstance.get(`products/categories`);
         return response?.data ?? [];
@@ -51,8 +51,6 @@ const getCategories = async (req) => {
         return [];
     }
 };
-
-'https://dummyjson.com/'
 
 const ProductService = {
     getAll,

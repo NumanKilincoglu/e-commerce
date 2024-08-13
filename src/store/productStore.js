@@ -6,6 +6,8 @@ export const useProductStore = defineStore('product', {
         loading: true,
         items: [],
         productCount: 0,
+        product: null,
+        productLoading: true,
         categories: [],
         filters: {
             limit: 24,
@@ -74,6 +76,25 @@ export const useProductStore = defineStore('product', {
                 this.productCount = 0;
             }
             this.loading = false;
+        },
+
+        async getProductDetail(id) {
+            try {
+                this.productLoading = true
+                const data = await ProductService.findOneProduct({ id: id });
+                if (!data) {
+                    this.product = null;
+                    this.productLoading = false;
+                    return
+                }
+
+                this.product = data;
+                this.productLoading = false;
+
+            } catch (err) {
+                console.error(err);
+                this.productLoading = false;
+            }
         },
 
         async findProductByName(searchTerm) {

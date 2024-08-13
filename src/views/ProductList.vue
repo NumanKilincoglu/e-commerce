@@ -221,6 +221,7 @@ const handleSearch = async (searchTerm) => {
 };
 
 const goProductPage = (itemID) => {
+  if (!itemID) return false;
   router.push({ path: `/product/${itemID}` });
 };
 

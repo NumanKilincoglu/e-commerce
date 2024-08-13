@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ProductList from '../views/ProductList.vue';
 import ProductDetail from '../views/ProductDetail.vue';
-import store from '../store/index.js';
 
 const routes = [
     {
@@ -10,6 +9,7 @@ const routes = [
         component: ProductList,
         meta: {
             authRequired: false,
+            transition: 'slide-right'
         },
     },
     {
@@ -18,6 +18,7 @@ const routes = [
         component: ProductDetail,
         meta: {
             authRequired: false,
+            transition: 'slide-left'
         },
     },
 ];

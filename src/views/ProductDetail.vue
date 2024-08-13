@@ -1,5 +1,8 @@
 <template>
-  <div v-if="product" class="product-details-content">
+  <div
+    v-if="!productStore.productLoading && productStore.product"
+    class="product-details-content"
+  >
     <div class="container">
       <div class="row">
         <div
@@ -8,14 +11,14 @@
           <div id="carouselControls" class="carousel slide mt-3">
             <div class="carousel-inner">
               <div
-                v-for="(image, index) in product.images"
+                v-for="(image, index) in productStore.product.images"
                 :key="index"
                 class="carousel-item"
                 :class="{ active: index === 0 }"
               >
                 <img
                   :src="image"
-                  :alt="product.title"
+                  :alt="productStore.product.title"
                   class="d-block w-100 carousel-image"
                   @click="updateThumbnail(image)"
                 />
@@ -57,76 +60,99 @@
           </div>
         </div>
         <div class="col-lg-7 col-md-12">
-          <h3 class="mb-3">{{ product.title }}</h3>
-          <p><strong></strong> {{ product.description }}</p>
-          <p><strong>Category:</strong> {{ product.category }}</p>
-          <p><strong>Brand:</strong> {{ product.brand }}</p>
-          <p><strong>SKU:</strong> {{ product.sku }}</p>
-          <p><strong>Weight:</strong> {{ product.weight }}g</p>
+          <h3 class="mb-3">{{ productStore.product.title }}</h3>
+          <p><strong></strong> {{ productStore.product.description }}</p>
+          <p><strong>Category:</strong> {{ productStore.product.category }}</p>
+          <p><strong>Brand:</strong> {{ productStore.product.brand }}</p>
+          <p><strong>SKU:</strong> {{ productStore.product.sku }}</p>
+          <p><strong>Weight:</strong> {{ productStore.product.weight }}g</p>
           <p>
-            <strong>Dimensions:</strong> {{ product.dimensions.width }} x
-            {{ product.dimensions.height }} x {{ product.dimensions.depth }} cm
+            <strong>Dimensions:</strong>
+            {{ productStore.product.dimensions.width }} x
+            {{ productStore.product.dimensions.height }} x
+            {{ productStore.product.dimensions.depth }} cm
           </p>
-          <p><strong>Warranty:</strong> {{ product.warrantyInformation }}</p>
+          <p>
+            <strong>Warranty:</strong>
+            {{ productStore.product.warrantyInformation }}
+          </p>
           <p>
             <strong>Shipping Information:</strong>
-            {{ product.shippingInformation }}
+            {{ productStore.product.shippingInformation }}
           </p>
-          <p><strong>Return Policy:</strong> {{ product.returnPolicy }}</p>
+          <p>
+            <strong>Return Policy:</strong>
+            {{ productStore.product.returnPolicy }}
+          </p>
           <p>
             <strong>Minimum Order Quantity:</strong>
-            {{ product.minimumOrderQuantity }}
+            {{ productStore.product.minimumOrderQuantity }}
           </p>
         </div>
       </div>
 
       <div class="row mt-4">
         <div class="col-12">
-          <h3 class="mb-3">Reviews</h3>
+          <h3 class="mb-3">
+            Reviews ({{
+              productStore?.product?.reviews
+                ? productStore.product.reviews.length
+                : 0
+            }})
+          </h3>
           <div
-            v-for="review in product.reviews"
-            :key="review.date"
-            class="review-card mb-3 p-3 border rounded shadow-sm"
+            v-if="
+              productStore.product.reviews &&
+              productStore.product.reviews.length > 0
+            "
           >
-            <div class="d-flex align-items-center mb-2">
-              <h5 class="me-2 mb-0">{{ review.reviewerName }}</h5>
-              <RatingBar :rating="review.rating" class="d-inline-block" />
+            <div
+              v-for="review in productStore.product.reviews"
+              :key="review.reviewerName"
+              class="review-card mb-3 p-3 border rounded shadow-sm"
+            >
+              <div class="d-flex align-items-center mb-2">
+                <h5 class="me-2 mb-0">{{ review.reviewerName }}</h5>
+                <RatingBar :rating="review.rating" class="d-inline-block" />
+              </div>
+              <p class="mb-2">{{ review.comment }}</p>
+              <p class="text-muted mb-0">
+                {{ new Date(review.date).toLocaleDateString() }}
+              </p>
             </div>
-            <p class="mb-2">{{ review.comment }}</p>
-            <p class="text-muted mb-0">
-              {{ new Date(review.date).toLocaleDateString() }}
-            </p>
+          </div>
+          <div v-else>
+            <p class="text-muted">No reviews available for this product.</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div v-else class="empty-field" style="height: 150px">
+    <h5>Items Not Found. Please try again</h5>
+    <VueIcon height="30px" color="black" icon="mingcute:sad-line" />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import ProductService from "../services/productService.js";
-import { useCartStore } from "../store/cartStore";
+import { useCartStore } from "../store/cartStore.js";
+import { useProductStore } from "../store/productStore.js";
+const error = ref(null);
 const cart = useCartStore();
-
+const productStore = useProductStore();
 const route = useRoute();
 const productId = route.params.id;
-const product = ref(null);
-const showDetails = ref(true);
 
 const getProductDetail = async () => {
-  product.value = await ProductService.findOneProduct({ id: productId });
+  await productStore.getProductDetail(productId);
 };
 
 const addToCard = () => {
-  if (!product) return;
-  const item = { ...product.value, quantity: 1 };
+  if (!productStore.product) return;
+  const item = { ...productStore.product, quantity: 1 };
   cart.addItem(item);
-};
-
-const toggleDetails = () => {
-  showDetails.value = !showDetails.value;
 };
 
 onMounted(() => {
@@ -146,7 +172,6 @@ export default {
 </script>
 
 <style scoped>
-
 p {
   margin-bottom: 0.8rem;
 }
@@ -205,5 +230,13 @@ p {
 
 .review-card .rating-bar {
   margin-right: 1rem;
+}
+
+.empty-field {
+  text-align: center;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
