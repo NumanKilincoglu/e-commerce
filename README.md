@@ -1,5 +1,23 @@
 # Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+E-Commerce Project
+This project is built using Vue 3, Vite, Vue Router, Bootstrap, and Pinia. It provides a fast and modern development environment with Vite, a modular state management solution with Pinia, and responsive UI components with Bootstrap and pure CSS.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+Installation
+-Prerequisites
+-Node.js (v14 or later)
+-npm or Yarn
+
+Steps
+  1-Clone the repository:
+    git clone https://github.com/NumanKilincoglu/e-commerce
+    cd e-commerce
+  2-Install dependencies:
+    npm install
+    yarn install
+    
+  Usage
+    Running the Development Server
+    To start the development server, run:
+    npm run dev or yarn dev
+  This will start the Vite development server, and you can view the project in your browser
