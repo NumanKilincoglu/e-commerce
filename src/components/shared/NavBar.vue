@@ -7,6 +7,9 @@
         </a>
       </div>
       <div class="navbar-right">
+        <h6>
+          {{ userStore.$state.isAuthenticated ? userStore.username : "" }}
+        </h6>
         <div class="user-avatar" @click="goToProfile">
           <img :src="avatarUrl" alt="User Avatar" />
         </div>
@@ -22,12 +25,14 @@
 <script setup>
 import { ref, watch } from "vue";
 import logo from "../../assets/images/logo.svg";
-import { useCartStore } from "../../store/cartStore";
+import { useCartStore } from "../../store/cartStore.js";
+import { useUserStore } from "../../store/userStore.js";
 
 const avatarUrl = ref("https://avatar.iran.liara.run/public");
 const logoUrl = ref(logo);
 const cartCount = ref(0);
 const cart = useCartStore();
+const userStore = useUserStore();
 
 cartCount.value = cart.itemCount.toString();
 
@@ -48,6 +53,11 @@ watch(
 </script>
 
 <style scoped>
+h6 {
+  margin: 0;
+  color: white;
+}
+
 .navbar {
   display: flex;
   justify-content: center;

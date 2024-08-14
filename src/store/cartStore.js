@@ -46,11 +46,10 @@ export const useCartStore = defineStore('cart', {
         return;
       }
 
-      window.alert(
+      alert(
         "Total Sum: " + this.cartTotal.toFixed(2) + "\nThank you for shopping."
       );
     },
-
     clearCart() {
       this.items = [];
       this.saveToLocalStorage();

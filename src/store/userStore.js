@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
         },
         setUsername(username) {
             this.username = username;
-            localStorage.setItem('username', JSON.stringify(username));
+            localStorage.setItem('username', username);
         },
         logout() {
             this.isAuthenticated = false;

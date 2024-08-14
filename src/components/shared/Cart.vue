@@ -174,6 +174,7 @@ h5 {
 @media screen and (max-width: 576px) {
   .cart-panel {
     width: 100%;
+    transition: transform 0.2s ease-in;
   }
 }
 </style>
