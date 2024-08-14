@@ -81,9 +81,7 @@ const clearCart = () => {
 };
 
 const proceed = () => {
-  window.alert(
-    "Total Sum: " + cart.cartTotal.toFixed(2) + "\nThank you for shopping."
-  );
+  cart.proceedCheckout();
 };
 
 watch(
