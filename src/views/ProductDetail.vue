@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="!productStore.productLoading && productStore.product"
-    class="product-details-content"
-  >
+  <div v-if="!productStore.productLoading && productStore.product" class="product-details-content">
     <div class="container">
       <div class="row">
         <div
@@ -128,7 +125,43 @@
       </div>
     </div>
   </div>
-  <div v-if="!productStore.productLoading && !productStore.product" class="empty-field" style="height: 150px">
+
+  <div v-else-if="productStore.productLoading" class="product-details-content shimmer-wrapper">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-lg-5 col-md-12 d-flex flex-column justify-content-center align-items-center mb-2"
+        >
+          <ShimmerEffect
+            class="button shimmer"
+            height="400px"
+            width="300px"
+          ></ShimmerEffect>
+        </div>
+        <div class="col-lg-7 col-md-12">
+          <ShimmerEffect class="title shimmer"></ShimmerEffect>
+          <ShimmerEffect
+            class="text shimmer"
+            v-for="n in 6"
+            :key="n"
+          ></ShimmerEffect>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <ShimmerEffect class="title shimmer" width="40%"></ShimmerEffect>
+          <ShimmerEffect
+            class="text shimmer"
+            height="80px"
+            v-for="n in 3"
+            :key="n"
+          ></ShimmerEffect>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-else class="empty-field" style="height: 150px">
     <h5>Items Not Found. Please try again</h5>
     <VueIcon height="30px" color="black" icon="mingcute:sad-line" />
   </div>
@@ -163,15 +196,22 @@ onMounted(() => {
 <script>
 import RatingBar from "../components/shared/RatingBar.vue";
 import GenericButton from "../components/buttons/CustomButton.vue";
+import ShimmerEffect from "../components/shimmer/ShimmerEffect.vue";
+
 export default {
   components: {
     RatingBar,
     GenericButton,
+    ShimmerEffect,
   },
 };
 </script>
 
 <style scoped>
+.shimmer-wrapper {
+  background-color: #f6f7f8;
+}
+
 p {
   margin-bottom: 0.8rem;
 }

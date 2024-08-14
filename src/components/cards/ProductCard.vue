@@ -9,7 +9,7 @@
       <img class="img" :src="item.thumbnail" />
     </a>
     <div class="detail">
-      <div>
+      <div v-if="item.rating">
         <h6>{{ item.title }}</h6>
         <div class="rating">
           <div>
