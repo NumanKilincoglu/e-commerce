@@ -77,6 +77,10 @@ h5 {
   font-size: 1rem;
 }
 
+h6 {
+  font-size: 0.8rem;
+}
+
 .discount {
   position: absolute;
   top: 10px;

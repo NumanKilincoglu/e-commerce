@@ -83,24 +83,27 @@
       </div>
 
       <div class="product-grid">
-        <transition-group
-          name="grid"
-          tag="div"
-          class="grid-container"
-          v-if="
-            !productStore.loading &&
-            productStore.items &&
-            productStore.items.length > 0
-          "
-        >
+        <transition-group name="grid" tag="div" class="grid-container">
           <ProductCard
             v-for="(item, index) in productStore.items"
+            v-if="
+              !productStore.loading &&
+              productStore.items &&
+              productStore.items.length > 0
+            "
             :item="item"
             :key="item.id"
             @addToCart="addToCard"
             @go-product="goProductPage"
           ></ProductCard>
         </transition-group>
+        <div class="grid-container">
+          <ShimmerCard
+            v-if="productStore.loading"
+            v-for="n in productStore.filters.limit"
+            :key="n"
+          ></ShimmerCard>
+        </div>
         <div
           class="empty-field"
           style="height: 150px"
@@ -317,7 +320,7 @@ import SearchBar from "../components/shared/SearchBar.vue";
 import PaginationRow from "../components/shared/PaginationBar.vue";
 import Dropdown from "../components/dropdowns/SortDropdown.vue";
 import GenericButton from "../components/buttons/CustomButton.vue";
-
+import ShimmerCard from "../components/cards/ShimmerCard.vue";
 export default {
   components: {
     SearchBar,
@@ -326,6 +329,7 @@ export default {
     PaginationRow,
     Dropdown,
     GenericButton,
+    ShimmerCard,
   },
 };
 </script>

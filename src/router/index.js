@@ -4,6 +4,15 @@ import ProductDetail from '../views/ProductDetail.vue';
 
 const routes = [
     {
+        path: "/",
+        redirect: '/products',
+        component: ProductList,
+        meta: {
+            authRequired: false,
+            transition: 'slide-right'
+        },
+    },
+    {
         path: "/products",
         name: "products",
         component: ProductList,
