@@ -56,22 +56,28 @@ The e-commerce project leverages Vue 3, Vite, Vue Router, Bootstrap, and Pinia t
    - **Bootstrap**: Integrated for its responsive grid system and pre-built components, speeding up development and ensuring a consistent design.
    - **Custom CSS**: Employed to address specific design needs and achieve a unique look and feel.
 
-### Design Choices
+## Design Choices
 
-1. **Component-Based Architecture**:
-   - Leveraged Vue's component-based architecture for reusable and modular UI components, promoting code reuse and maintainability.
+### Component-Based Architecture
+- **Utilized Vue's component-based architecture**: Created reusable and modular UI components to promote code reuse and maintainability.
 
-2. **Responsive Design**:
-   - Utilized Bootstrap’s grid system to ensure the application is mobile-friendly and adapts to different screen sizes.
+### Responsive Design
+- **Implemented Bootstrap’s grid system**: Ensured the application is mobile-friendly and adapts to various screen sizes.
 
-3. **Performance Optimization**:
-   - Choose Vite for efficient build processes and a faster development server to improve build times and reduce overhead.
+### Performance Optimization
+- **Adopted Vite**: Choose Vite for efficient build processes and a faster development server, leading to improved build times and reduced overhead.
 
-4. **State Management**:
-   - Adopted Pinia for its modern approach to state management, making complex state logic easier to handle and improving code organization.
+### State Management
+- **Adopted Pinia**: Used Pinia for its modern approach to state management, simplifying complex state logic and enhancing code organization.
 
-5. **User Experience**:
-   - Focused on delivering a smooth and intuitive user experience with a clean UI and responsive design for better device usability.
+### User Experience
+- **Focused on delivering a smooth user experience**: Designed a clean and intuitive UI with responsive elements to enhance device usability.
+
+### Router Transitions
+- **Implemented Vue Router transitions**: Applied transition effects to improve navigation between different views, contributing to a smoother user experience.
+
+### User Authentication
+- **Integrated user authentication**: Ensured secure access to protected routes and actions, such as adding items to the cart, by verifying user credentials.
 
 ### !!!IMPORTANT NOTE!!!
 Mock API Limitation: Currently, the mock API does not support filtering by price range. Consequently, filtering by price range only applies to the items on the current page. This approach was necessary due to API constraints.
