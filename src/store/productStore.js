@@ -48,6 +48,7 @@ export const useProductStore = defineStore('product', {
         pageNumbers: [1, 2, 3, 4, 5, 6],
     }),
     actions: {
+        //retrieves categories for filtering items
         async getCategories() {
             const response = await ProductService.getCategories();
 
@@ -63,6 +64,7 @@ export const useProductStore = defineStore('product', {
             }
         },
 
+        //fetches items from API
         async getItems() {
             this.loading = true;
             const queryString = this.buildQueryString();
@@ -78,6 +80,7 @@ export const useProductStore = defineStore('product', {
             this.loading = false;
         },
 
+        //fetches only one item by ID from API
         async getProductDetail(id) {
             try {
                 this.productLoading = true
@@ -97,6 +100,7 @@ export const useProductStore = defineStore('product', {
             }
         },
 
+        //fetches items by name from API
         async findProductByName(searchTerm) {
             if (!searchTerm || searchTerm == "")
                 return this.filters.searchQuery = '';
@@ -105,10 +109,7 @@ export const useProductStore = defineStore('product', {
             await this.getItems();
         },
 
-        async selectCategory() {
-            await this.getItems();
-        },
-
+        //builds search query for API 
         buildQueryString() {
             let queryString = '';
 
@@ -127,6 +128,7 @@ export const useProductStore = defineStore('product', {
             return queryString;
         },
 
+        //builds search query for API 
         async filterByPrice() {
             if (this.filters.priceFrom == null || this.filters.priceTo == null) {
                 return await this.getItems();

@@ -31,6 +31,8 @@ export const useCartStore = defineStore('cart', {
       this.isOpen = !this.isOpen;
       this.saveToLocalStorage();
     },
+
+    //Saves the current state of the cart to localStorage.
     saveToLocalStorage() {
       localStorage.setItem('cartItems', JSON.stringify(this.items));
       localStorage.setItem('cartIsOpen', JSON.stringify(this.isOpen));

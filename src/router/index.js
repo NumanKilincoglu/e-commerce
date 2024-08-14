@@ -39,16 +39,17 @@ const router = createRouter({
 
 const isAuthenticated = false;
 
+//navigation guard for protecting routes
+//for protecting routes we can change the (meta.authRequired tag to true)
 router.beforeEach((to, from, next) => {
     if (to.meta.authRequired && !isAuthenticated) {
-        // Redirect to login or another route if not authenticated
+
+        // Redirect to login or another route if not authenticated for now its /products route
         next('/products');
+        alert('You are not allowed to visit this page. Please login first!')
     } else {
-        next(); // Continue
+        next(); // Continue to route
     }
 });
-
-
-
 
 export default router;

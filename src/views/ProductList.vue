@@ -216,6 +216,7 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
+// Limits API requests while searching by debouncing the input
 const handleSearch = async (searchTerm) => {
   clearTimeout(timeout);
   timeout = setTimeout(async () => {
@@ -223,6 +224,7 @@ const handleSearch = async (searchTerm) => {
   }, 750);
 };
 
+//goes product detail page by itemID
 const goProductPage = (itemID) => {
   if (!itemID) return false;
   router.push({ path: `/product/${itemID}` });
@@ -234,6 +236,7 @@ const addToCard = (item) => {
   cart.addItem(item);
 };
 
+//Moves to a specific page or navigates left/right between pages.
 const movePage = async (type, number) => {
   if (type === "left_right") {
     productStore.filters.page = Math.max(1, productStore.filters.page + number);
@@ -246,6 +249,7 @@ const movePage = async (type, number) => {
   await productStore.getItems();
 };
 
+// Updates the visible page numbers based on the current page.
 const updatePageNumbers = () => {
   const current = productStore.filters.page;
   const maxPage = productStore.pageNumbers[productStore.pageNumbers.length - 1];
@@ -264,6 +268,7 @@ const updatePageNumbers = () => {
   }
 };
 
+//Handles changes to the price filter.
 const onPriceFilterChange = (newValue, index) => {
   if (newValue) {
     productStore.priceFilters.forEach((filter, i) => {
@@ -282,6 +287,7 @@ const onPriceFilterChange = (newValue, index) => {
   productStore.filterByPrice();
 };
 
+//Handles changes to the category filter.
 const onCategoryChange = async (newValue, index) => {
   if (newValue) {
     productStore.categories.forEach((filter, i) => {
@@ -297,6 +303,7 @@ const onCategoryChange = async (newValue, index) => {
   await productStore.getItems();
 };
 
+//watches for changes on sorting dropdown
 watch(
   () => productStore.selectedSorting,
   async (newValue) => {
