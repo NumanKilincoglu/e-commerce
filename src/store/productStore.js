@@ -10,7 +10,7 @@ export const useProductStore = defineStore('product', {
         productLoading: true,
         categories: [],
         filters: {
-            limit: 24,
+            limit: 12,
             skip: 0,
             page: 1,
             searchQuery: '',

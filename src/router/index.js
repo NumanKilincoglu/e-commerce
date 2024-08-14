@@ -37,4 +37,18 @@ const router = createRouter({
     routes,
 });
 
+const isAuthenticated = false;
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.authRequired && !isAuthenticated) {
+        // Redirect to login or another route if not authenticated
+        next('/products');
+    } else {
+        next(); // Continue
+    }
+});
+
+
+
+
 export default router;
