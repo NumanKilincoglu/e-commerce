@@ -2,6 +2,8 @@
 
 This project is built using Vue 3, Vite, Vue Router, Bootstrap, and Pinia. It provides a fast and modern development environment with Vite, a modular state management solution with Pinia, and responsive UI components with Bootstrap and pure CSS.
 
+Live Demo: https://e-commerce-5n2o.onrender.com
+
 ## Installation
 
 ### Prerequisites
